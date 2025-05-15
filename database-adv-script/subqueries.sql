@@ -1,10 +1,12 @@
-select *
-from property p 
-where property_id IN(
-	select property_id
-	from review r 
-	where rating > 4.0
-)
+SELECT *
+FROM property p
+WHERE p.property_id IN (
+    SELECT r.property_id
+    FROM review r
+    GROUP BY r.property_id
+    HAVING AVG(r.rating) > 4.0
+);
+
 
 select *
 from "User" u 
