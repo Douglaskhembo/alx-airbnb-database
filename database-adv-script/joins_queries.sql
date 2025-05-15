@@ -22,7 +22,8 @@ SELECT
     r.comment,
     r.created_at
 FROM property p
-LEFT JOIN review r ON r.property_id = p.property_id;
+LEFT JOIN review r ON r.property_id = p.property_id
+ORDER BY p.property_id;
 
 
 -- Retrieve all users and bookings, even if not linked to each other
