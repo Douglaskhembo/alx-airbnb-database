@@ -15,3 +15,23 @@ CREATE INDEX IF NOT EXISTS idx_property_host_id ON property(host_id);
 CREATE INDEX IF NOT EXISTS idx_property_location ON property(location);
 CREATE INDEX IF NOT EXISTS idx_property_pricepernight ON property(pricepernight);
 
+-- Measure performance BEFORE and AFTER indexes using EXPLAIN ANALYZE
+EXPLAIN ANALYZE
+SELECT *
+FROM booking b
+JOIN "User" u ON u.user_id = b.user_id
+WHERE b.start_date >= '2025-01-01'
+ORDER BY b.start_date DESC;
+
+EXPLAIN ANALYZE
+SELECT *
+FROM property p
+LEFT JOIN review r ON p.property_id = r.property_id
+WHERE p.location = 'Nairobi'
+ORDER BY p.pricepernight DESC;
+
+EXPLAIN ANALYZE
+SELECT *
+FROM booking
+WHERE user_id = 5 AND property_id = 10;
+
